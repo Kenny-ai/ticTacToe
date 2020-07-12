@@ -195,7 +195,7 @@ li {
 .draw-message span,
 .lose-message span,
 .win-message span {
-  color: gray;
+  color: white;
   text-align: center;
   position: relative;
   font-size: 1.2rem;
@@ -424,7 +424,7 @@ i.win {
                 $('.game-choice button').click(function () {
                 GAME.twoPlayers = GAME.gameLogic.gameSelection(this);
                 GAME.display.hideGameChoice();
-                $(".start-game").fadeIn();
+                GAME.display.showStartGame();
 
                 $('.start-game .choose-x, .start-game .choose-o').off().click(GAME.gameLogic.firstGame);
 
@@ -443,17 +443,17 @@ i.win {
             hideStartGame: function() {
                 $(".start-game").fadeOut();
             },
-            showStartGame: function(isTwoPlayer) {
+            showStartGame: function() {
                 let startGamePrompt;
-                if (isTwoPlayer) {
+                if (GAME.twoPlayers) {
                 startGamePrompt = "Player 1: Which would you like to be? X or O"; 
                 }
                 else {
                 startGamePrompt = "Which would you like to be? X or O";
                 }
-                setTimeout(function () {
-                $('start-game').fadeIn(500).children('p').text(startGamePrompt);
-                }, 700);
+                $('start-game').children('p').text(startGamePrompt);
+                $('.start-game').fadeIn(); 
+                
             },
 
             showGameChoice: function () {
@@ -599,7 +599,7 @@ i.win {
             },
             firstGame: function () {
                 GAME.playerOneSymbol = $(this).text();
-                GAME.playerTwoSymbol = GAME.playerOneSymbol == 'O' ? 'X' : 'O';
+                GAME.playerTwoSymbol = GAME.playerOneSymbol == 'X' ? 'O' : 'X';
                 GAME.turn = GAME.gameLogic.firstTurn();
                 GAME.display.hideStartGame();
                 $('#canvasDesign').animate({ 'opacity': '1' }, 1200);
@@ -658,6 +658,7 @@ i.win {
                     GAME.display.hidePlayerOnePrompt();
                     GAME.display.hidePlayerTwoPrompt();
                     GAME.gameLogic.reset();
+                    
                 }
                 // stop if it is a draw
                 else if (GAME.numFilledIn >= 9) {
@@ -728,17 +729,17 @@ i.win {
                 GAME.display.hideLoseMessage();
                 GAME.display.hideWinMessage();
                 $('.boxes li').fadeOut();
-                }, 5000),
+                }, 1000),
+        
                 setTimeout(function () {
                 GAME.display.resetSquares();
                 $('.boxes li').fadeIn();
                 GAME.numFilledIn = 0;
-                }, 6000),
-                
+                }, 1000),
                 setTimeout(function () {
                 GAME.gameInPlay = true;
                 GAME.gameLogic.play();
-                }, 6000));
+              }, 2000));
             },
             resetGame: function () {
                 $('#canvasDesign').css('opacity', '0');
