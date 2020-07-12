@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Tic Tac Toe game</title>
+        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Architects+Daughter">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="ticTacToe.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+        <style>
+            body {
+  width: 100%;
+  height: 100%;
+}
+.wood-container {
+  background: #C19A6B;
+  box-shadow: inset -1px 1px 7px rgba(0,0,0,.2), 
+  inset 1px -1px 7px rgba(0,0,0,.2), 
+  1px 12px 5px rgba(0,0,0,.4), 
+  4px 3px 8px rgba(0,0,0,.4), 
+  5px 10px 10px rgba(0,0,0,.2), 
+  -5px 10px 10px rgba(0,0,0,.4);
+  position: relative;
+  border-radius: 10px;
+  width: 400px;
+  height: 390px;
+  margin: 10% auto;
+  padding: 40px 0 0 0;
+  }
+.board-container {
+  width: 350px;
+  height: 350px;
+  background:rgba(80,80,80,1)
+  -webkit-radial-gradient(center, rgba(80,120,80,1), rgba(40,60,80,1));
+  background: rgba(80,80,80,1)
+    -moz-radial-gradient(center, rgba(80,120,80,1), rgba(40,60,40,1));
+  background: rgba(80,80,80,1)
+    -ms-radial-gradient(center, rgba(80,120,80,1), rgba(40,60,40,1));
+  background: rgba(80,80,80,1)
+    radial-gradient(center, rgba(80,120,80,1), rgba(40,60,40,1));
+  background-size: cover;
+  position: relative;
+  margin: 0 auto;
+  overflow: hidden;
+
+}
+.game-choice,
+.start-game {
+  background:rgba(80,80,80,1)
+  -webkit-radial-gradient(center, rgba(80,120,80,1), rgba(40,60,80,1));
+  background: rgba(80,80,80,1)
+    -moz-radial-gradient(center, rgba(80,120,80,1), rgba(40,60,40,1));
+  background: rgba(80,80,80,1)
+    -ms-radial-gradient(center, rgba(80,120,80,1), rgba(40,60,40,1));
+  background: rgba(80,80,80,1)
+    radial-gradient(center, rgba(80,120,80,1), rgba(40,60,40,1));
+  display: block;
+  width: 100%;
+  height: 500px;
+  position: absolute;
+  top: 0px;
+  text-align: center;
+  font-family: 'Architects Daughter', Helvetica, sans-serif;
+  z-index: 1500;
+}
+
+.start-game {
+  display: none;
+}
+
+.game-choice p, h1,
+.start-game p {
+  font-size: 1.5rem;
+}
+.game-choice h1 {
+    color: rgba(220,220,220,1);
+}
+
+.game-choice button,
+.game-choice p,
+.start-game button,
+.start-game p {
+  color: rgba(220,220,220,1);
+  position: relative;
+  top: 50px;
+  margin: 10px auto;
+}
+
+.game-choice p,
+.start-game p {
+  max-width: 80%;
+}
+.game-choice button {
+  position: relative;
+  top: 100px;
+}
+
+.game-choice button,
+.start-game button {
+  background: none;
+  opacity: 0.5;
+  border: 2px solid transparent;
+  font-size: 1.5rem;
+  font-family: cursive;
+}
+
+.start-game button {
+  font-size: 3rem;
+  font-family: "Architects Daughter", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.game-choice button:focus,
+.start-game button:focus {
+  outline: none;
+}
+.game-choice button:hover,
+.start-game button:hover {
+  opacity: 1;
+  border: 2px dashed gray;
+  border-radius: 10px;
+}
+
+.start-game button.back-button  {
+  position: absolute;
+  top: 270px;
+  right: 130px;
+  font-size: 1.5rem;
+}
+
+.start-game .back-button:hover {
+  border: none;
+}
+
+button {
+  cursor: pointer;
+}
+.game-board {
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  position: relative;
+}
+.boxes {
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  left: 12px;
+  top: 0;
+}
+
+.boxes li {
+  width: 30%;
+  height: 30%;
+  display: inline-block;
+  position: relative;
+  z-index: 1000;
+  margin-left: 2px;
+  margin-right: 2px;
+  overflow: hidden;
+}
+
+li i {
+  font-size: 6.5rem;
+  text-align: center;
+  display: block;
+  width: 100%;
+  height: 100%;
+  font-style: normal;
+  font-family: "Architects Daughter", "Helvetica", "sans-serif";
+  color: rgba(220,220,220,.7);
+  z-index: 500;
+}
+
+li span {
+  position: relative;
+  bottom: 15px;
+}
+li {
+  list-style: none;
+}
+.draw-message,
+.lose-message,
+.win-message {
+  background: rgba(0,0,0,.8);
+  width: 400px;
+  height: 400px;
+  z-index: 2000;
+  position: absolute;
+  display: none;
+  top: -15px;
+  left: 0;
+  box-sizing: border-box;
+}
+.draw-message span,
+.lose-message span,
+.win-message span {
+  color: gray;
+  text-align: center;
+  position: relative;
+  font-size: 1.2rem;
+  margin: 0;
+  top: 310px;
+  left: 70px;
+  font-family: 'Architects Daughter', sans-serif;
+}
+
+.draw-message p,
+.lose-message p,
+.win-message p {
+  color: white;
+  text-align: center;
+  position: absolute;
+  font-size: 2rem;
+  margin: 0;
+  top: 150px;
+  left: 100px;
+  font-family: 'Architects Daughter', sans-serif;
+}
+.reset {
+  position: absolute;
+  top: 5px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-family: 'Architects Daughter', sans-serif;
+  color: rgba(100,60,50,.8);
+  font-size: 1.1rem;
+  border-radius: 20px;
+  display: none;
+}
+  
+.reset:hover {
+  border: 2px dotted rgba(100,60,50,1);
+  color: rgba(100,60,50,1);
+}
+  
+.reset:focus {
+  outline: none;
+}
+.player-one-turn {
+  background: rgba(0,200,200,1);
+  left: 15px;
+}
+  
+.player-two-turn {
+  background: rgba(200,100,100,1);
+  right: 15px;
+}
+  
+.player-one-turn,
+.player-two-turn {
+  position: absolute;
+  top: 0;
+  width: 170px;
+  height: 50px;
+  z-index: -10;
+  color: white;
+  text-align: center;
+}
+  
+.player-one-turn p,
+.player-two-turn p {
+  font-size: 1.3rem;
+  margin-top: 10px;
+  font-family: cursive;
+}
+.score-divider,
+.score-1,
+.score-2 {
+  position: absolute;
+  font-size: .9rem;
+  margin: 0;
+  display: none;
+}
+
+.score-1,
+.score-2 {
+  font-family: 'Architects Daughter', sans-serif;
+  top: 17px;
+  color: rgba(100,60,50,.8);
+}
+
+.score-1 .name, 
+.score-2 .name {
+  position: absolute;
+  text-align: center;
+  bottom: 14px;
+  color: rgba(100,60,50, .9);
+  font-family: 'Architects Daughter', sans-serif;
+}
+
+.score-divider {
+  top: 5px;
+  left: 140px;
+  font-size: 2rem;
+  font-family: helvetica, sans-serif;
+  font-style: normal;
+  color: rgba(100,60,50,.4);
+}
+
+.score-1 {
+  left: 75px;
+}
+
+.score-2 {
+  left: 161px;
+}
+#canvasDesign {
+  width: 330px;
+  height: 330px;
+  position: absolute;
+  z-index: 0;
+  left: 10px;
+  top: 0;
+  opacity: 0;
+}
+span.rotate {
+  color: orange;
+}
+i.win {
+  background: green;
+}
+.rotate {
+  -webkit-animation: cross 1s;
+  -moz-animation: cross 1s;
+  -ms-animation: cross 1s;
+  -o-animation: cross 1s;
+  animation: cross 1s;
+  animation-fill-mode: forwards;
+}
+
+@-webkit-keyframes cross {
+  100% {
+    width: 300px;
+  }
+}
+@keyframes cross {
+  100% {
+    width: 300px;
+  }
+}
+        </style>
+    </head>
+    <body>
+        <div class="wood-container">
+            <button class="reset">Reset</button> 
+            <p class="score-1"><span class="name"></span><span class="score"></span></p>
+            <i class="score-divider">&#124;</i>
+            <p class="score-2"><span class="name"></span><span class="score"></span></p>
+            <div class="player-one-turn">
+                <p></p>
+            </div>
+            <div class="player-two-turn">
+                <p></p>
+            </div>
+            <div class="board-container">
+                <div class="game-choice">
+                    <h1>TIC TAC TOE !</h1>
+                    <p id="gameChoice">How would you like to play?</p>
+                    <button class="one-player">One Player</button>
+                    <button class="two-players" id="twoPlayers">Two Players</button>
+                </div>
+                
+                <div class="start-game">
+                    <p id="playersOrComputer">Would you like to be X or O?</p>
+                    <button class="choose-x">X</button>
+                    <button class="choose-o">O</button>
+                    <button class="back-button"><i class="fa fa-arrow-left"></i> Back</button>
+                </div>
+                
+                <div class="game-board">
+                    <div class="draw-message">
+                        <p>It was a tie</p>
+                        <span class="continue">Click board to continue...</span>
+                    </div>
+                    <div class="lose-message">
+                        <p>You lost</p>
+                        <span class="continue">Click board to continue...</span>
+                    </div>
+                    <div class="win-message">
+                        <p>You Won!</p>
+                        <span class="continue">Click board to continue...</span>
+                    </div>
+                    <canvas id="canvasDesign"></canvas>
+                    <ul class="boxes"></ul>
+                </div>
+            </div>
+        </div>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+        <script id="rendered-js">
+            let GAME = {
+            gameInPlay: false,
+            winCombos: [
+            [1, 2, 3],
+            [4, 5, 6],
+            [7, 8, 9],
+            [1, 4, 7],
+            [2, 5, 8],
+            [3, 6, 9],
+            [1, 5, 9],
+            [7, 5, 3]],
+
+            playerOneScore: 0,
+            playerTwoScore: 0,
+            timeOuts: [],
+            initializeVars: function () {
+                this.numFilledIn = 0;
+                this.currentBoard = {
+                1: '',
+                2: '',
+                3: '',
+                4: '',
+                5: '',
+                6: '',
+                7: '',
+                8: '',
+                9: '' };
+
+            },
+            initializeGame: function () {
+                GAME.initializeVars();
+                GAME.display.boardLines();
+                $('.game-choice button').click(function () {
+                GAME.twoPlayers = GAME.gameLogic.gameSelection(this);
+                GAME.display.hideGameChoice();
+                $(".start-game").fadeIn();
+
+                $('.start-game .choose-x, .start-game .choose-o').off().click(GAME.gameLogic.firstGame);
+
+                $('.back-button').on('click', function () {
+                    GAME.display.hideStartGame();
+                    GAME.display.showGameChoice();
+                });
+                });
+                $('.reset').on('click', GAME.gameLogic.resetGame);
+            } };
+
+
+
+
+            GAME.display = {
+            hideStartGame: function() {
+                $(".start-game").fadeOut();
+            },
+            showStartGame: function(isTwoPlayer) {
+                let startGamePrompt;
+                if (isTwoPlayer) {
+                startGamePrompt = "Player 1: Which would you like to be? X or O"; 
+                }
+                else {
+                startGamePrompt = "Which would you like to be? X or O";
+                }
+                setTimeout(function () {
+                $('start-game').fadeIn(500).children('p').text(startGamePrompt);
+                }, 700);
+            },
+
+            showGameChoice: function () {
+                $('.game-choice').fadeIn(600);
+            },
+
+            hideGameChoice: function () {
+                $('.game-choice').fadeOut(600);
+            },
+
+            showPlayerOnePrompt: function () {
+                if (GAME.twoPlayers) {
+                $('.player-one-turn p').text('Go Player 1!');
+                } else
+                {
+                $('.player-one-turn p').text('Your turn!');
+                }
+                $('.player-one-turn').animate({ 'top': '-45px' }, 500);
+            },
+
+            hidePlayerOnePrompt: function () {
+                $('.player-one-turn').animate({ 'top': '0' }, 500);
+            },
+
+            showPlayerTwoPrompt: function () {
+                if (GAME.twoPlayers) {
+                $('.player-two-turn p').text('Go Player 2!');
+                } else
+                {
+                $('.player-two-turn p').text("Computer's turn");
+                }
+                $('.player-two-turn').animate({ 'top': '-45px' }, 500);
+            },
+            hidePlayerTwoPrompt: function () {
+                $('.player-two-turn').animate({ 'top': '0' }, 500);
+            },
+            showWinMessage: function () {
+                GAME.timeOuts.push(
+                setTimeout(function () {
+                $('.win-message').fadeIn(500).children('p').text("Player " + GAME.turn + " wins!!");
+                }, 1500));
+            },
+            hideWinMessage: function () {
+                $(".board-container").click(function() {
+                $('.win-message').fadeOut();
+                })
+            
+            },
+            showDrawMessage: function () {
+                GAME.timeOuts.push(
+                setTimeout(function () {
+                    $('.draw-message').fadeIn(500);
+                }, 1500));
+                },
+            hideDrawMessage: function () {
+                $(".board-container").click(function() {
+                $('.draw-message').fadeOut();
+                })
+            },
+            showLoseMessage: function () {
+                GAME.timeOuts.push(
+                setTimeout(function () {
+                $('.lose-message').fadeIn(500);
+                }, 1500));
+
+            },
+            hideLoseMessage: function () {
+                $(".board-container").click(function() {
+                $('.draw-message').fadeOut();
+                })
+            },
+            boardLines: function () {
+                GAME.timeOuts.push(setTimeout(function () {
+                var c = document.getElementById("canvasDesign");
+                var canvas = c.getContext("2d");
+                canvas.lineWidth = 1;
+                canvas.strokeStyle = "white";
+                //vertical lines
+                canvas.beginPath();
+                canvas.moveTo(100, 0);
+                canvas.lineTo(100, 146.5);
+                canvas.closePath();
+                canvas.stroke();
+                canvas.beginPath();
+                canvas.moveTo(200, 0);
+                canvas.lineTo(200, 146.5);
+                canvas.closePath();
+                canvas.stroke();
+
+                // horizontal lines
+                canvas.lineWidth = .5;
+
+                canvas.beginPath();
+                canvas.moveTo(4, 48.5);
+                canvas.lineTo(296, 48.5);
+                canvas.closePath();
+                canvas.stroke();
+
+                canvas.beginPath();
+                canvas.moveTo(4, 98.5);
+                canvas.lineTo(296, 98.5);
+                canvas.closePath();
+                canvas.stroke();
+                }, 1500));
+            },
+            resetSquares: function () {
+                $('.boxes').html('');
+                for (let i = 1; i <= 9; i++) {
+                let box = '<li class="' + i + '"><i class="letter"><span></span></i></li>';
+                $(box).appendTo($('.boxes'));
+                };
+            },
+            showScores: function () {
+                if (GAME.twoPlayers) {
+                $('.score-1').children('.name').text('player1');
+                $('.score-2').children('.name').text('player2');
+                } else
+                {
+                $('.score-1').children('.name').text('player1');
+                $('.score-2').children('.name').text('computer');
+                }
+                $('.score-1, .score-2').children('.score').text('0');
+                $('.score-1,.score-2, .score-divider').fadeIn();
+            },
+            updateScore: function (userTurn) {
+                let currentScore = userTurn === 1 ? GAME.playerOneScore : GAME.playerTwoScore;
+                $('.score-' + GAME.turn).children('.score').text(currentScore);
+            } 
+            };
+
+            GAME.gameLogic = {
+            firstTurn: function() {
+                let randomStart = Math.floor(Math.random() * 2 + 1);
+                return randomStart;
+            },
+            gameSelection: function (param) {
+                if ($(param).text() === 'One Player') {
+                return false;
+                } else
+                {
+                return true;
+                }
+            },
+            firstGame: function () {
+                GAME.playerOneSymbol = $(this).text();
+                GAME.playerTwoSymbol = GAME.playerOneSymbol == 'O' ? 'X' : 'O';
+                GAME.turn = GAME.gameLogic.firstTurn();
+                GAME.display.hideStartGame();
+                $('#canvasDesign').animate({ 'opacity': '1' }, 1200);
+                $('.reset').fadeIn(600);
+                GAME.display.showScores();
+                GAME.display.resetSquares();
+                GAME.gameLogic.play();
+            },
+            play: function () {
+                GAME.gameInPlay = true;
+                $('.boxes li').on('click', function () {
+                GAME.gameLogic.playerTurn(this);
+                });
+
+                GAME.timeOuts.push(setTimeout(function () {
+                if (GAME.turn === 1) {
+                    GAME.display.showPlayerOnePrompt();
+                } 
+                else if (GAME.turn === 2) {
+                    GAME.display.showPlayerTwoPrompt();
+                }
+                }, 1500),
+                setTimeout(function () {
+                if (GAME.turn === 2 && !GAME.twoPlayers) {
+                    GAME.gameLogic.computerPlay();
+                }
+                }, 1200));
+            },
+            playerTurn: function (square) {
+                let symbol = GAME.turn === 1 ? GAME.playerOneSymbol : GAME.playerTwoSymbol;
+                let box = $(square).children('i').children('span');
+                if (box.text() === '' && GAME.gameInPlay && (GAME.turn === 1 || GAME.turn === 2 && GAME.twoPlayers)) {
+                box.text(symbol);
+                let number = $(square).attr('class');
+                GAME.gameLogic.updateSquare(number, symbol);
+                GAME.gameLogic.endTurn(symbol);
+                }
+            },
+            /*computer algo */
+            computerPlay: {
+
+            },
+            endTurn: function (symbol) {
+                GAME.numFilledIn = GAME.numFilledIn + 1;
+                if (GAME.gameInPlay) {
+                if (GAME.gameLogic.checkWin(symbol)[0]) {
+                    GAME.gameLogic.updateScore(GAME.turn);
+                    if (GAME.twoPlayers) {
+                    GAME.display.showWinMessage();
+                    } else
+                    {
+                    GAME.turn === 1 ? GAME.display.showWinMessage() : GAME.display.showLoseMessage();
+                    }
+                    GAME.gameInPlay = false;
+                    GAME.gameLogic.showWinningCombination();
+                    GAME.display.hidePlayerOnePrompt();
+                    GAME.display.hidePlayerTwoPrompt();
+                    GAME.gameLogic.reset();
+                }
+                // stop if it is a draw
+                else if (GAME.numFilledIn >= 9) {
+                    GAME.gameInPlay = false;
+                    GAME.display.hidePlayerOnePrompt();
+                    GAME.display.hidePlayerTwoPrompt();
+                    GAME.display.showDrawMessage();
+                    GAME.turn = GAME.gameLogic.firstTurn();
+                    GAME.gameLogic.reset();
+                    } else {
+                    if (GAME.turn === 1) {
+                        GAME.display.hidePlayerOnePrompt();
+                        GAME.display.showPlayerTwoPrompt();
+                        GAME.turn = 2;
+                        // call computer turn if no second player
+                        if (!GAME.twoPlayers) {
+                        GAME.gameLogic.computerPlay();
+                        }
+                    } else if (GAME.turn === 2) {
+                        GAME.display.showPlayerOnePrompt();
+                        GAME.display.hidePlayerTwoPrompt();
+                        GAME.turn = 1;
+                    }
+                    }
+                }
+            },
+            updateSquare: function (number, symbol) {
+                GAME.currentBoard[number] = symbol;
+            },
+            checkWin: function (symbol) {
+                let currentBoard = GAME.currentBoard;
+                let wins = GAME.winCombos;
+                let winningCombo = [];
+                let winner = wins.some(function (combination) {
+                let winning = true;
+                for (let i = 0; i < combination.length; i++) {
+                    if (currentBoard[combination[i]] !== symbol) {
+                    winning = false;
+                    }
+                };
+                if (winning) {
+                    winningCombo = combination;
+                }
+                return winning;
+                });
+                return [winner, winningCombo];
+            },
+            showWinningCombination: function () {
+                let symbol = GAME.turn === 1 ? GAME.playerOneSymbol : GAME.playerTwoSymbol;
+                let combo = GAME.gameLogic.checkWin(symbol)[1];
+                for (let i = 0; i < combo.length; i++) {
+                let currentBox = '.' + combo[i];
+                    
+                $(currentBox).children('i').addClass('win').children('span').addClass('rotate');
+                };
+            },
+            updateScore: function (turn) {
+                turn === 1 ? GAME.playerOneScore += 1 : GAME.playerTwoScore += 1;
+
+                GAME.display.updateScore(turn);
+
+            },
+            reset: function () {
+                GAME.initializeVars();
+
+                GAME.timeOuts.push(setTimeout(function () {
+                GAME.display.hideDrawMessage();
+                GAME.display.hideLoseMessage();
+                GAME.display.hideWinMessage();
+                $('.boxes li').fadeOut();
+                }, 5000),
+                setTimeout(function () {
+                GAME.display.resetSquares();
+                $('.boxes li').fadeIn();
+                GAME.numFilledIn = 0;
+                }, 6000),
+                
+                setTimeout(function () {
+                GAME.gameInPlay = true;
+                GAME.gameLogic.play();
+                }, 6000));
+            },
+            resetGame: function () {
+                $('#canvasDesign').css('opacity', '0');
+                $('.reset').fadeOut();
+                $('.score-divider, .score-1, .score-2').fadeOut();
+                GAME.playerOneScore = 0;
+                GAME.playerTwoScore = 0;
+                GAME.display.resetSquares();
+                GAME.initializeVars();
+                GAME.gameInPlay = false;
+                GAME.playerOneSymbol = null;
+                GAME.playerTwoSymbol = null;
+                GAME.timeOuts.forEach(function (timer) {
+                clearTimeout(timer);
+                });
+                $('.draw-message, .win-message, .lose-message').hide();
+                GAME.display.hidePlayerOnePrompt();
+                GAME.display.hidePlayerTwoPrompt();
+                GAME.display.showGameChoice();
+            }
+            };
+
+            $(document).ready(function () {
+            GAME.initializeGame();
+            });
+        </script>
+    </body>
+</html>
