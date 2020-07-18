@@ -1,0 +1,332 @@
+body {
+    width: 100%;
+    height: 100%;
+  }
+  .wood-container {
+    background: #C19A6B;
+    box-shadow: inset -1px 1px 7px rgba(0,0,0,.2), 
+    inset 1px -1px 7px rgba(0,0,0,.2), 
+    1px 12px 5px rgba(0,0,0,.4), 
+    4px 3px 8px rgba(0,0,0,.4), 
+    5px 10px 10px rgba(0,0,0,.2), 
+    -5px 10px 10px rgba(0,0,0,.4);
+    position: relative;
+    border-radius: 10px;
+    width: 400px;
+    height: 390px;
+    margin: 10% auto;
+    padding: 40px 0 0 0;
+    }
+  .board-container {
+    width: 350px;
+    height: 350px;
+    background:rgba(80,80,80,1)
+    -webkit-radial-gradient(center, rgba(80,120,80,1), rgba(40,60,80,1));
+    background: rgba(80,80,80,1)
+      -moz-radial-gradient(center, rgba(80,120,80,1), rgba(40,60,40,1));
+    background: rgba(80,80,80,1)
+      -ms-radial-gradient(center, rgba(80,120,80,1), rgba(40,60,40,1));
+    background: rgba(80,80,80,1)
+      radial-gradient(center, rgba(80,120,80,1), rgba(40,60,40,1));
+    background-size: cover;
+    position: relative;
+    margin: 0 auto;
+    overflow: hidden;
+  
+  }
+  .game-choice,
+  .start-game {
+    background:rgba(80,80,80,1)
+    -webkit-radial-gradient(center, rgba(80,120,80,1), rgba(40,60,80,1));
+    background: rgba(80,80,80,1)
+      -moz-radial-gradient(center, rgba(80,120,80,1), rgba(40,60,40,1));
+    background: rgba(80,80,80,1)
+      -ms-radial-gradient(center, rgba(80,120,80,1), rgba(40,60,40,1));
+    background: rgba(80,80,80,1)
+      radial-gradient(center, rgba(80,120,80,1), rgba(40,60,40,1));
+    display: block;
+    width: 100%;
+    height: 500px;
+    position: absolute;
+    top: 0px;
+    text-align: center;
+    font-family: 'Architects Daughter', Helvetica, sans-serif;
+    z-index: 1500;
+  }
+  
+  .start-game {
+    display: none;
+  }
+  
+  .game-choice p, h1,
+  .start-game p {
+    font-size: 1.5rem;
+  }
+  .game-choice h1 {
+      color: rgba(220,220,220,1);
+  }
+  
+  .game-choice button,
+  .game-choice p,
+  .start-game button,
+  .start-game p {
+    color: rgba(220,220,220,1);
+    position: relative;
+    top: 50px;
+    margin: 10px auto;
+  }
+  
+  .game-choice p,
+  .start-game p {
+    max-width: 80%;
+  }
+  .game-choice button {
+    position: relative;
+    top: 100px;
+  }
+  
+  .game-choice button,
+  .start-game button {
+    background: none;
+    opacity: 0.5;
+    border: 2px solid transparent;
+    font-size: 1.5rem;
+    font-family: cursive;
+  }
+  
+  .start-game button {
+    font-size: 3rem;
+    font-family: "Architects Daughter", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  }
+  
+  .game-choice button:focus,
+  .start-game button:focus {
+    outline: none;
+  }
+  .game-choice button:hover,
+  .start-game button:hover {
+    opacity: 1;
+    border: 2px dashed gray;
+    border-radius: 10px;
+  }
+  
+  .start-game button.back-button  {
+    position: absolute;
+    top: 270px;
+    right: 130px;
+    font-size: 1.5rem;
+  }
+  
+  .start-game .back-button:hover {
+    border: none;
+  }
+  
+  button {
+    cursor: pointer;
+  }
+  .game-board {
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    position: relative;
+  }
+  .boxes {
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    left: 12px;
+    top: 0;
+  }
+  
+  .boxes li {
+    width: 30%;
+    height: 30%;
+    display: inline-block;
+    position: relative;
+    z-index: 1000;
+    margin-left: 2px;
+    margin-right: 2px;
+    overflow: hidden;
+  }
+  
+  li i {
+    font-size: 6.5rem;
+    text-align: center;
+    display: block;
+    width: 100%;
+    height: 100%;
+    font-style: normal;
+    font-family: "Architects Daughter", "Helvetica", "sans-serif";
+    color: rgba(220,220,220,.7);
+    z-index: 500;
+  }
+  
+  li span {
+    position: relative;
+    bottom: 15px;
+  }
+  li {
+    list-style: none;
+  }
+  .draw-message,
+  .lose-message,
+  .win-message {
+    background: rgba(0,0,0,.8);
+    width: 400px;
+    height: 400px;
+    z-index: 2000;
+    position: absolute;
+    display: none;
+    top: -15px;
+    left: 0;
+    box-sizing: border-box;
+  }
+  .draw-message span,
+  .lose-message span,
+  .win-message span {
+    color: gray;
+    text-align: center;
+    position: relative;
+    font-size: 1.2rem;
+    margin: 0;
+    top: 310px;
+    left: 70px;
+    font-family: 'Architects Daughter', sans-serif;
+  }
+  
+  .draw-message p,
+  .lose-message p,
+  .win-message p {
+    color: white;
+    text-align: center;
+    position: absolute;
+    font-size: 2rem;
+    margin: 0;
+    top: 150px;
+    left: 100px;
+    font-family: 'Architects Daughter', sans-serif;
+  }
+  .reset {
+    position: absolute;
+    top: 5px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-family: 'Architects Daughter', sans-serif;
+    color: rgba(100,60,50,.8);
+    font-size: 1.1rem;
+    border-radius: 20px;
+    display: none;
+  }
+    
+  .reset:hover {
+    border: 2px dotted rgba(100,60,50,1);
+    color: rgba(100,60,50,1);
+  }
+    
+  .reset:focus {
+    outline: none;
+  }
+  .player-one-turn {
+    background: rgba(0,200,200,1);
+    left: 15px;
+  }
+    
+  .player-two-turn {
+    background: rgba(200,100,100,1);
+    right: 15px;
+  }
+    
+  .player-one-turn,
+  .player-two-turn {
+    position: absolute;
+    top: 0;
+    width: 170px;
+    height: 50px;
+    z-index: -10;
+    color: white;
+    text-align: center;
+  }
+    
+  .player-one-turn p,
+  .player-two-turn p {
+    font-size: 1.3rem;
+    margin-top: 10px;
+    font-family: cursive;
+  }
+  .score-divider,
+  .score-1,
+  .score-2 {
+    position: absolute;
+    font-size: .9rem;
+    margin: 0;
+    display: none;
+  }
+  
+  .score-1,
+  .score-2 {
+    font-family: 'Architects Daughter', sans-serif;
+    top: 17px;
+    color: rgba(100,60,50,.8);
+  }
+  
+  .score-1 .name, 
+  .score-2 .name {
+    position: absolute;
+    text-align: center;
+    bottom: 14px;
+    color: rgba(100,60,50, .9);
+    font-family: 'Architects Daughter', sans-serif;
+  }
+  
+  .score-divider {
+    top: 5px;
+    left: 140px;
+    font-size: 2rem;
+    font-family: helvetica, sans-serif;
+    font-style: normal;
+    color: rgba(100,60,50,.4);
+  }
+  
+  .score-1 {
+    left: 75px;
+  }
+  
+  .score-2 {
+    left: 161px;
+  }
+  #canvasDesign {
+    width: 330px;
+    height: 330px;
+    position: absolute;
+    z-index: 0;
+    left: 10px;
+    top: 0;
+    opacity: 0;
+  }
+  span.rotate {
+    color: orange;
+  }
+  i.win {
+    background: green;
+  }
+  .rotate {
+    -webkit-animation: cross 1s;
+    -moz-animation: cross 1s;
+    -ms-animation: cross 1s;
+    -o-animation: cross 1s;
+    animation: cross 1s;
+    animation-fill-mode: forwards;
+  }
+  
+  @-webkit-keyframes cross {
+    100% {
+      width: 300px;
+    }
+  }
+  @keyframes cross {
+    100% {
+      width: 300px;
+    }
+  }
