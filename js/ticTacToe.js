@@ -1,3 +1,5 @@
+require('./cpu');
+
 let GAME = {
   gameInPlay: false,
   winCombos: [  //game win combinations
@@ -284,8 +286,8 @@ GAME.gameLogic = {
     }
   },
   //computer algo goes here
-  computerPlay: {
-
+  computerPlay: () => {
+    console.log(bestSpot);
   },
 
   //show win or lose message after game ends
