@@ -1,3 +1,4 @@
+require('./cpu');
 let GAME = {
     gameInPlay: false,
     winCombos: [
@@ -248,8 +249,8 @@ let GAME = {
         }
     },
     /*computer algo */
-    computerPlay: {
-        
+    computerPlay: function() {
+        console.log(bestSpot);
     },
     endTurn: function (symbol) {
         GAME.numFilledIn = GAME.numFilledIn + 1;

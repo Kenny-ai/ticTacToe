@@ -286,7 +286,7 @@ GAME.gameLogic = {
     }
   },
   //computer algo goes here
-  computerPlay: () => {
+  computerPlay: function() {
     console.log(bestSpot);
   },
 
