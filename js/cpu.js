@@ -6,7 +6,7 @@ let theBoard = [0, 1, 2, 3, 4, 5, 6, 7, 8]; // The board has been intialized wit
 const cpuPlayer = "X";
 const humanPlayer = "O";
 
-let functionCalls = 0; // keeps track of the number fo function calls
+let functionCalls = 0; // keeps track of the number of function calls
 
 let bestSpot = minimax(theBoard, cpuPlayer);
 
