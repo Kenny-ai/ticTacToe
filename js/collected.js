@@ -1,4 +1,4 @@
-require('./cpu');
+//require('./cpu');
 let GAME = {
     gameInPlay: false,
     winCombos: [
@@ -338,17 +338,17 @@ let GAME = {
         GAME.display.hideLoseMessage();
         GAME.display.hideWinMessage();
         $('.boxes li').fadeOut();
-        }, 5000),
+        }, 3000),
         setTimeout(function () {
         GAME.display.resetSquares();
         $('.boxes li').fadeIn();
         GAME.numFilledIn = 0;
-        }, 6000),
+        }, 3000),
         
         setTimeout(function () {
         GAME.gameInPlay = true;
         GAME.gameLogic.play();
-        }, 6000));
+        }, 3000));
     },
     resetGame: function () {
         $('#canvasDesign').css('opacity', '0');
