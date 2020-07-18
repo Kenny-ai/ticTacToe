@@ -1,5 +1,5 @@
 // Init the board
-let theBoard = ["O", 1, 2, "X", "X", "X", "O", 7, "O"]; // The board has been intialized with it's respective indexes 
+let theBoard = [0, 1, 2, 3, 4, 5, 6, 7, 8]; // The board has been intialized with it's respective indexes 
 
 // Declare the player tokens, you'll need to make
 // these random later
